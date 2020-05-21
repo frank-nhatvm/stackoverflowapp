@@ -1,0 +1,32 @@
+{
+  "items": [
+    {
+      "tags": [
+        "php",
+        "encryption"
+      ],
+      "owner": {
+        "reputation": 3,
+        "user_id": 13565481,
+        "user_type": "registered",
+        "profile_image": "https://www.gravatar.com/avatar/3c9ed98918ffc0eb1001da4baf2e8503?s=128&d=identicon&r=PG&f=1",
+        "display_name": "Alfha",
+        "link": "https://stackoverflow.com/users/13565481/alfha"
+      },
+      "is_answered": false,
+      "view_count": 9,
+      "answer_count": 0,
+      "score": 0,
+      "last_activity_date": 1589967976,
+      "creation_date": 1589965382,
+      "last_edit_date": 1589967976,
+      "question_id": 61909126,
+      "content_license": "CC BY-SA 4.0",
+      "link": "https://stackoverflow.com/questions/61909126/encoding-model-used-by-facebook",
+      "title": "Encoding model used by Facebook"
+    }
+  ],
+  "has_more": true,
+  "quota_max": 300,
+  "quota_remaining": 299
+}

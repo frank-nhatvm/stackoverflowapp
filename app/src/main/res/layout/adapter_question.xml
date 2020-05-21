@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="question"
+            type="com.frank.stackoverflowapp.pages.question.questiondetail.models.Question" />
+
+        <variable
+            name="clickItemListener"
+            type="com.frank.stackoverflowapp.pages.question.listquestions.adapters.QuestionsAdapter.QuestionItemListener" />
+
+    </data>
+
+    <LinearLayout
+        android:onClick="@{() -> clickItemListener.onClick(question)}"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="5">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:orientation="horizontal"
+            android:paddingStart="24dp"
+            android:paddingTop="24dp">
+
+            <TextView
+                android:id="@+id/tvVotes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{String.valueOf(question.score)}"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="1" />
+
+            <TextView
+                android:id="@+id/tvTitleVotes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="@string/votes"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                app:layout_constraintStart_toEndOf="@id/tvVotes"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <TextView
+                android:id="@+id/tvAnswers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@{String.valueOf(question.answerCount)}"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvVotes"
+                tools:text="10" />
+
+            <TextView
+                android:id="@+id/tvTitleAnswers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="@string/answers"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                app:layout_constraintStart_toEndOf="@id/tvAnswers"
+                app:layout_constraintTop_toTopOf="@id/tvAnswers" />
+
+            <TextView
+                android:id="@+id/tvViews"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@{String.valueOf(question.viewCount)}"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvAnswers"
+                tools:text="10" />
+
+            <TextView
+                android:id="@+id/tvTitleViews"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="@string/views"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                app:layout_constraintStart_toEndOf="@id/tvViews"
+                app:layout_constraintTop_toTopOf="@id/tvViews" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:paddingTop="24dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:orientation="vertical">
+
+            <TextView
+                tools:text="How to build an Android app"
+                android:text="@{question.title}"
+                android:textSize="20sp"
+                android:textColor="@android:color/black"
+                android:id="@+id/tvTitleQuestion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_marginTop="5dp"
+                android:id="@+id/tvAskBy"
+                tools:text="Asked by Frank"
+                android:text="@{question.owner.displayName}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+</layout>
