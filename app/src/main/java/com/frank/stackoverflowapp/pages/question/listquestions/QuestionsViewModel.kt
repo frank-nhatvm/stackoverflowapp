@@ -9,12 +9,12 @@ import javax.inject.Inject
 
 class QuestionsViewModel @Inject constructor(private val questionRepository: QuestionRepository) : ViewModel() {
 
-    private var _listQuestions = MutableLiveData<List<Question>>()
-    val listQuestions: LiveData<List<Question>>
+    private var _listQuestions = MutableLiveData<List<Question>?>()
+    val listQuestions: LiveData<List<Question>?>
         get() = _listQuestions
 
     val isEmptyQuestion: LiveData<Boolean> = Transformations.map(_listQuestions) {
-        it.isEmpty()
+        (it ?: emptyList()).isEmpty()
     }
 
     private var _dataLoading = MutableLiveData<Boolean>()

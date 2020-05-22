@@ -52,6 +52,6 @@ class QuestionRepositoryTest {
 
         val listQuestion = result.listQuestions
         Assert.assertNotNull(listQuestion)
-        Assert.assertThat(listQuestion.size,IsEqual(1))
+        Assert.assertThat(listQuestion?.size,IsEqual(1))
     }
 }

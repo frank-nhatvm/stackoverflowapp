@@ -62,14 +62,14 @@ class QuestionsServiceTest {
         val listQuestions = questionResponse.listQuestions
         Assert.assertNotNull(listQuestions)
 
-        Assert.assertThat(listQuestions.size, IsEqual(1))
+        Assert.assertThat(listQuestions?.size, IsEqual(1))
 
-        val firstQuestion = listQuestions[0]
+        val firstQuestion = listQuestions?.get(0)
         Assert.assertNotNull(firstQuestion)
-        Assert.assertThat(firstQuestion.title, IsEqual("Encoding model used by Facebook"))
-        Assert.assertThat(firstQuestion.viewCount, IsEqual(9))
-        Assert.assertThat(firstQuestion.answerCount, IsEqual(0))
-        Assert.assertThat(firstQuestion.score, IsEqual(0))
+        Assert.assertThat(firstQuestion?.title, IsEqual("Encoding model used by Facebook"))
+        Assert.assertThat(firstQuestion?.viewCount, IsEqual(9))
+        Assert.assertThat(firstQuestion?.answerCount, IsEqual(0))
+        Assert.assertThat(firstQuestion?.score, IsEqual(0))
     }
 
 
