@@ -34,7 +34,7 @@ class QuestionsFragmentTest
 
         Mockito.`when`(viewModel.listQuestions).thenReturn(listQuestions)
 
-      
+      val scenario = launchFragmentInContainer<QuestionsFragment>()
 
     }
 
