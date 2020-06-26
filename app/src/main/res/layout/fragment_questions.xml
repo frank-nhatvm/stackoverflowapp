@@ -11,6 +11,8 @@
 
         <import type="android.view.View"/>
 
+        <import type="androidx.lifecycle.LiveData"/>
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -19,16 +21,7 @@
         android:layout_height="match_parent"
         tools:context=".pages.question.listquestions.QuestionsFragment">
 
-        <TextView
-            android:visibility="@{viewModel.isEmptyQuestion ? View.VISIBLE : View.GONE}"
-            android:id="@+id/tv_questions_empty"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="There is no questions."
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rcvListQuestions"
@@ -58,5 +51,15 @@
 
         </RelativeLayout>
 
+        <TextView
+            android:visibility="@{viewModel.isEmptyQuestion() ? View.VISIBLE : View.GONE}"
+            android:id="@+id/tv_questions_empty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="There is no questions."
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

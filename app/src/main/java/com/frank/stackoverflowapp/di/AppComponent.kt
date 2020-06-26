@@ -11,6 +11,7 @@ import javax.inject.Singleton
 @Component(modules = [NetworkModule::class,ViewModelModule::class])
 interface AppComponent {
 
+
     @Component.Factory
     interface Factory{
         fun create(): AppComponent

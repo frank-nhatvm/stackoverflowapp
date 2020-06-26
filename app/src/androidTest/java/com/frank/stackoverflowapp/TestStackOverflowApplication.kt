@@ -1,4 +1,10 @@
 package com.frank.stackoverflowapp
 
 
-class TestStackOverflowApplication: StackOverflowApplication()
+import com.frank.stackoverflowapp.di.DaggerTestAppComponent
+import com.frank.stackoverflowapp.di.TestAppComponent
+
+
+class TestStackOverflowApplication : StackOverflowApplication() {
+    override val appComponent: TestAppComponent = DaggerTestAppComponent.create()
+}

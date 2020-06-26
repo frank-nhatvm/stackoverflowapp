@@ -3,6 +3,7 @@ package com.frank.stackoverflowapp.pages.question.listquestions
 import android.content.Context
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -38,47 +39,56 @@ class QuestionsFragment : Fragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         stackOverFlowApplication.appComponent.inject(this)
-        viewModel = ViewModelProvider(this,viewModelFactory).get(QuestionsViewModel::class.java)
+
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-         dataBinding = FragmentQuestionsBinding.inflate(inflater)
-        dataBinding.lifecycleOwner = viewLifecycleOwner
-        dataBinding.viewModel = viewModel
-
-        viewModel.getListQuestions()
-
-        initAdapter()
-
-        viewModel.listQuestions.observe(viewLifecycleOwner, Observer { adapter.submitList(it) })
-
-        initRecycleViewQuestions()
-
-        viewModel.navigateToQuestionPage.observe(viewLifecycleOwner,EventObserver{
-            navigateToQuestionDetail(it)
-        })
-
+        dataBinding = FragmentQuestionsBinding.inflate(inflater)
         return dataBinding.root
     }
 
-    private fun initAdapter(){
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+        viewModel = ViewModelProvider(this, viewModelFactory).get(QuestionsViewModel::class.java)
+
+        dataBinding.lifecycleOwner = viewLifecycleOwner
+        dataBinding.viewModel = viewModel
+
+        initAdapter()
+
+        viewModel.listQuestions.observe(viewLifecycleOwner, Observer {
+            adapter.submitList(it)
+        })
+
+        initRecycleViewQuestions()
+
+        viewModel.navigateToQuestionPage.observe(viewLifecycleOwner, EventObserver {
+            navigateToQuestionDetail(it)
+        })
+
+        viewModel.getListQuestions()
+
+    }
+
+    private fun initAdapter() {
         adapter = QuestionsAdapter(QuestionsAdapter.QuestionItemListener {
             viewModel.openQuestionDetailPage(it)
         })
     }
 
-    private fun initRecycleViewQuestions(){
-        activity?.let{
+    private fun initRecycleViewQuestions() {
+        activity?.let {
             dataBinding.rcvListQuestions.layoutManager = LinearLayoutManager(it)
-            dataBinding.rcvListQuestions.adapter  = adapter
+            dataBinding.rcvListQuestions.adapter = adapter
         }
     }
 
-    private fun navigateToQuestionDetail(questionId: String){
-        this.findNavController().navigate(QuestionsFragmentDirections.actionQuestionsFragmentToQuestionFragment(questionId))
+    private fun navigateToQuestionDetail(questionId: String) {
+        this.findNavController().navigate(
+            QuestionsFragmentDirections.actionQuestionsFragmentToQuestionFragment(questionId)
+        )
     }
 }

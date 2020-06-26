@@ -1,14 +1,18 @@
 package com.frank.stackoverflowapp.pages.question.listquestions
 
+import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.*
 import com.frank.stackoverflowapp.base.Event
 import com.frank.stackoverflowapp.pages.question.questiondetail.models.Question
 import com.frank.stackoverflowapp.pages.question.questiondetail.repositories.QuestionRepository
+import com.frank.stackoverflowapp.testing.OpenForTesting
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class QuestionsViewModel @Inject constructor(private val questionRepository: QuestionRepository) : ViewModel() {
-
+@OpenForTesting
+open class QuestionsViewModel @Inject constructor(val questionRepository: QuestionRepository) :
+    ViewModel() {
+    //@VisibleForTesting
     private var _listQuestions = MutableLiveData<List<Question>?>()
     val listQuestions: LiveData<List<Question>?>
         get() = _listQuestions
@@ -31,17 +35,18 @@ class QuestionsViewModel @Inject constructor(private val questionRepository: Que
 
     }
 
-     fun getListQuestions() {
-         viewModelScope.launch {
-             _dataLoading.value = true
-             val result = questionRepository.getListQuestions().await()
-             _listQuestions.value = result.listQuestions
-             _dataLoading.value = false
-         }
+
+    fun getListQuestions() {
+        viewModelScope.launch {
+            _dataLoading.value = true
+            val result = questionRepository.getListQuestions().await()
+            _listQuestions.value = result.listQuestions
+            _dataLoading.value = false
+        }
     }
 
-    fun openQuestionDetailPage(questionId: Long?){
-        questionId?.let{
+    fun openQuestionDetailPage(questionId: Long?) {
+        questionId?.let {
             _navigateToQuestionPage.value = Event(it.toString())
         }
     }
